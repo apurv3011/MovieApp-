@@ -4,13 +4,18 @@ import Navbar from "./navbar";
 import Pagenation from "./Pagenation";
 import Search from "./search";
 import Table from "./Table";
+import './App.css';
 class App extends React.Component {
 
   state = {
     movie : [],
     genre : [],
+    selectedFilter :"All Genre",
 
   };
+  setFilter = (filter) => {
+    this.setState({selectedFilter : filter});
+  }
   componentDidMount() {
     //i will get data here
 
@@ -34,10 +39,15 @@ class App extends React.Component {
      <div>
         <Navbar />
         <div className = "row">
-        <Filter genreName = {this.state.genre}/>
+        <Filter 
+          genreName = {this.state.genre}
+          handleFilter = {this.setFilter}
+          selectedFilter = {this.state.selectedFilter}
+        />
           <div class="col-9 p-4">
           <Search />
-          <Table movieData = {this.state.movie}/>
+          <Table movieData = {this.state.movie} 
+            selectedFilter = {this.state.selectedFilter}/>
           </div>
         </div>
      

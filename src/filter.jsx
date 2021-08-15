@@ -1,22 +1,34 @@
-// import { render } from "@testing-library/react";
+import React from 'react';
 
-let Filter = (props) => {
-    console.log("inside filter");
-    console.log(props.genreName);
-    return(
+ let Filter =  (props) => {
+  return(
         <div class="col-3">
         <ul class="list-group m-4">
-          <li class="list-group-item">All Genre</li>
+          <li 
+          onClick = {() =>{
+            props.handleFilter( "All Genre");
+          }}
+          class = {`list-group-item ${props.selectedFilter === "All Genre" ? "active" : ""}`}
+          >All Genre</li>
+          
+          
           {
                props.genreName.map((el) => {
-                return  <li key = {el.key} class="list-group-item">{el.name}</li>;
+                return ( 
+                <li
+                   onClick = {() => {
+                  props.handleFilter(el.name);
+                  }} 
+                  key = {el._id} 
+                  class={`list-group-item ${props.selectedFilter === el.name ? "active" : "" }`}>{el.name}
+                </li>
+                  );
                
             })
           }
         </ul>
       </div>
     );
-
 
 }
 

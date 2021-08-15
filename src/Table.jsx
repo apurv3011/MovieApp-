@@ -1,6 +1,15 @@
 import Pagenation from "./Pagenation";
+import './App.css'
 let Table = (props) => {
-
+console.log(props);
+let allmovies = props.movieData;
+let curFilter = props.selectedFilter;
+let filteredMovieArr = allmovies.filter((el) => {
+  if(curFilter == "All Genre")
+  return el;
+  else if(el.genre.name == curFilter)
+  return el;
+})
     return (
         <>
         <div class="row">
@@ -15,7 +24,7 @@ let Table = (props) => {
               </tr>
             </thead>
             <tbody>
-            { props.movieData.map((el) => {
+            { filteredMovieArr.map((el) => {
                  return (
                      <tr key = {el._id}>
                          <td>{el.title}</td>
